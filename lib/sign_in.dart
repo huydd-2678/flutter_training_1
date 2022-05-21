@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:training_1/logo.dart';
 import 'package:training_1/sign_up.dart';
+import 'package:training_1/enums.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -11,7 +13,7 @@ class SignInScreen extends StatefulWidget {
 class SignInScreenState extends State<SignInScreen> {
   bool? isRememberPassword = true;
 
-  final Gradient _gradient = const LinearGradient(
+  final Gradient gradient = const LinearGradient(
     colors: [Color(0xFFFE7B43), Color(0xFFF53371)],
     begin: Alignment.topRight,
     end: Alignment.bottomLeft,
@@ -23,39 +25,7 @@ class SignInScreenState extends State<SignInScreen> {
     double screenWidth = MediaQuery.of(context).size.width;
     // bool? isRememberPassword = true;
 
-    Widget _logo(double width) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Image.asset('assets/images/logo.png', width: width),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const <Widget>[
-              Text('CONN',
-                  style: TextStyle(
-                      color: Color(0xFFF6366A),
-                      fontSize: 36,
-                      fontWeight: FontWeight.w900)),
-              Text('EXION',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 36,
-                      fontWeight: FontWeight.w900))
-            ],
-          ),
-          const SizedBox(height: 4),
-          const Text('Find and Meet people around \nyou to find LOVE',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w300))
-        ],
-      );
-    }
-
-    Widget _signInTitle() {
+    Widget signInTitle() {
       return const Text(
         'SIGN IN',
         style: TextStyle(
@@ -63,45 +33,29 @@ class SignInScreenState extends State<SignInScreen> {
       );
     }
 
-    Widget _emailField() {
-      return const TextField(
+    Widget inputField(InputFieldType type) {
+      String hint =
+          type == InputFieldType.email ? 'Enter Email' : 'Enter Password';
+      bool obscure = type == InputFieldType.email ? false : true;
+      return TextField(
         decoration: InputDecoration(
-            hintText: 'Enter Email',
-            hintStyle: TextStyle(color: Colors.white),
-            enabledBorder: UnderlineInputBorder(
+            hintText: hint,
+            hintStyle: const TextStyle(color: Colors.white),
+            enabledBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.white)),
-            focusedBorder: UnderlineInputBorder(
+            focusedBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.white)),
-            border: UnderlineInputBorder(
+            border: const UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.white)),
             isDense: true,
-            contentPadding: EdgeInsets.only(bottom: 6)),
-        keyboardType: TextInputType.emailAddress,
+            contentPadding: const EdgeInsets.only(bottom: 6)),
         cursorColor: Colors.white,
-        style: TextStyle(color: Colors.white, fontSize: 16),
+        style: const TextStyle(color: Colors.white, fontSize: 16),
+        obscureText: obscure,
       );
     }
 
-    Widget _passwordField() {
-      return const TextField(
-        decoration: InputDecoration(
-            hintText: 'Password',
-            hintStyle: TextStyle(color: Colors.white),
-            enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white)),
-            focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white)),
-            border: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white)),
-            isDense: true,
-            contentPadding: EdgeInsets.only(bottom: 6)),
-        keyboardType: TextInputType.visiblePassword,
-        cursorColor: Colors.white,
-        style: TextStyle(color: Colors.white, fontSize: 16),
-      );
-    }
-
-    Widget _rememberPassword() {
+    Widget rememberPassword() {
       return Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
@@ -125,7 +79,7 @@ class SignInScreenState extends State<SignInScreen> {
       );
     }
 
-    Widget _signInButton(double width, double height) {
+    Widget signInButton(double width, double height) {
       return ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
@@ -137,7 +91,7 @@ class SignInScreenState extends State<SignInScreen> {
         ),
         child: ShaderMask(
           blendMode: BlendMode.modulate,
-          shaderCallback: (size) => _gradient.createShader(
+          shaderCallback: (size) => gradient.createShader(
             Rect.fromLTWH(0, 0, size.width, size.height),
           ),
           child: const Text(
@@ -151,49 +105,41 @@ class SignInScreenState extends State<SignInScreen> {
       );
     }
 
-    Widget _socialSignIn() {
+    Widget socialSignInButton(SocialType type) {
+      String imgSource = type == SocialType.facebook
+          ? 'assets/images/facebook.png'
+          : 'assets/images/twitter.png';
+      return ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: const CircleBorder(),
+          primary: Colors.white,
+          fixedSize: const Size(60, 60),
+          onPrimary: const Color(0xFFFA5C57),
+        ),
+        child: ShaderMask(
+          blendMode: BlendMode.srcATop,
+          shaderCallback: (size) => gradient.createShader(
+            Rect.fromLTWH(0, 0, size.width, size.height),
+          ),
+          child: Image.asset(imgSource, width: 25),
+        ),
+        onPressed: () {},
+      );
+    }
+
+    Widget socialSignIn() {
       return Container(
           padding: const EdgeInsets.symmetric(horizontal: 60),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: const CircleBorder(),
-                  primary: Colors.white,
-                  fixedSize: const Size(60, 60),
-                  onPrimary: const Color(0xFFFA5C57),
-                ),
-                child: ShaderMask(
-                  blendMode: BlendMode.srcATop,
-                  shaderCallback: (size) => _gradient.createShader(
-                    Rect.fromLTWH(0, 0, size.width, size.height),
-                  ),
-                  child: Image.asset('assets/images/facebook.png', width: 25),
-                ),
-                onPressed: () {},
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: const CircleBorder(),
-                  primary: Colors.white,
-                  fixedSize: const Size(60, 60),
-                  onPrimary: const Color(0xFFFA5C57),
-                ),
-                child: ShaderMask(
-                  blendMode: BlendMode.srcATop,
-                  shaderCallback: (size) => _gradient.createShader(
-                    Rect.fromLTWH(0, 0, size.width, size.height),
-                  ),
-                  child: Image.asset('assets/images/twitter.png', width: 25),
-                ),
-                onPressed: () {},
-              ),
+              socialSignInButton(SocialType.facebook),
+              socialSignInButton(SocialType.twitter),
             ],
           ));
     }
 
-    Widget _forgotPassword() {
+    Widget forgotPassword() {
       return TextButton(
           onPressed: () {},
           style: ButtonStyle(
@@ -206,7 +152,7 @@ class SignInScreenState extends State<SignInScreen> {
                   decorationThickness: 1.5)));
     }
 
-    Widget _signUp(BuildContext context) {
+    Widget signUp(BuildContext context) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -236,6 +182,7 @@ class SignInScreenState extends State<SignInScreen> {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset : false,
       body: Stack(
         children: <Widget>[
           Container(
@@ -257,21 +204,21 @@ class SignInScreenState extends State<SignInScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const SizedBox(height: 60),
-                    _logo(screenWidth / 2.4),
+                    Logo(width: screenWidth / 2.4),
                     const SizedBox(height: 20),
-                    _signInTitle(),
+                    signInTitle(),
                     const SizedBox(height: 40),
-                    _emailField(),
+                    inputField(InputFieldType.email),
                     const SizedBox(height: 40),
-                    _passwordField(),
+                    inputField(InputFieldType.password),
                     const SizedBox(height: 15),
-                    _rememberPassword(),
+                    rememberPassword(),
                     const SizedBox(height: 15),
-                    _signInButton(screenWidth * 0.8, 56),
+                    signInButton(screenWidth * 0.8, 56),
                     const SizedBox(height: 20),
-                    _socialSignIn(),
+                    socialSignIn(),
                     const SizedBox(height: 5),
-                    _forgotPassword()
+                    forgotPassword()
                   ],
                 ),
               ),
@@ -281,7 +228,7 @@ class SignInScreenState extends State<SignInScreen> {
                   width: screenWidth,
                   height: 60,
                   color: const Color(0xFFCB1F51),
-                  child: _signUp(context),
+                  child: signUp(context),
                 ),
               )
             ],
