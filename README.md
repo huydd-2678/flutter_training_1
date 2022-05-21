@@ -1,16 +1,9 @@
-# training_1
+# Flutter Training 1
 
-A new Flutter project.
+## Screenshots
 
-## Getting Started
+#### Sign in screen
+![Screenshot_1653115522](https://user-images.githubusercontent.com/77426474/169639574-b49f393b-b29f-48bb-8231-6ccc909d6a44.png)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#### Sign up screen
+![Screenshot_1653115625](https://user-images.githubusercontent.com/77426474/169639615-cf712a3d-ea8b-4a0b-a46a-94e076181648.png)
