@@ -88,9 +88,9 @@ Widget _signInFacebookButton(double width, double height) {
       onPressed: () {},
       style: ElevatedButton.styleFrom(
         primary: Colors.white,
-        elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
         fixedSize: Size(width, height),
+        onPrimary: const Color(0xFFFA5C57),
       ),
       child: Stack(
         children: [
@@ -140,9 +140,9 @@ Widget _signInTwitterButton(double width, double height) {
       onPressed: () {},
       style: ElevatedButton.styleFrom(
         primary: Colors.white,
-        elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
         fixedSize: Size(width, height),
+        onPrimary: const Color(0xFFFA5C57),
       ),
       child: Stack(
         children: [
@@ -192,9 +192,9 @@ Widget _signUpButton(double width, double height) {
     onPressed: () {},
     style: ElevatedButton.styleFrom(
       primary: Colors.white,
-      elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
       fixedSize: Size(width, height),
+      onPrimary: const Color(0xFFFA5C57),
     ),
     child: ShaderMask(
       blendMode: BlendMode.modulate,
@@ -217,6 +217,8 @@ Widget _signInButton(BuildContext context) {
       onPressed: () {
         Navigator.pop(context);
       },
+      style: ButtonStyle(
+          overlayColor: MaterialStateProperty.all(Colors.transparent)),
       child: const Text('ALREADY REGISTERED? SIGN IN',
           style: TextStyle(
               color: Colors.white,
